@@ -1,13 +1,12 @@
-function Animal(name){
+class Animal{
+  constructor (name){
     this.name = name;
-}
+  }
+  action(){
+    document.getElementById(this.actionSoundName).play();
+  }
 
-Animal.prototype.action = function(){
-  document.getElementById(this.actionSoundName).play();
-  
-}
-
-Animal.prototype.putInTheDocument = function(){
+  putInTheDocument(){
     var petsTable = document.getElementById("petsTable");
     var petTR = document.createElement("tr");
   
@@ -26,27 +25,34 @@ Animal.prototype.putInTheDocument = function(){
     petTR.appendChild(petActionTD);
     
     petActionTDButton.onclick = this.action.bind(this);
-    petsTable.querySelector("tbody").appendChild(petTR)
+    petsTable.querySelector("tbody").appendChild(petTR);
+  }
 }
 
 
-function Cat(name){
-    Animal.call(this, name);
+
+
+class Cat extends Animal{
+  constructor (name) {
+    super(name);
     this.legs = 4;
-    this.actionText = "Meoow"
-    this.actionSoundName = "meow"
+    this.actionText = "Meoow";
+    this.actionSoundName = "meow";
+  }
 }
 
-Cat.prototype = Animal.prototype;
 
-function Monkey(name){
-    Animal.call(this, name);
+
+class Monkey extends Animal{
+  constructor(name){
+    super(name);
     this.legs = 2;
     this.actionText = "Scream";
     this.actionSoundName = "scream";
+  }
+    
+    
 }
-
-Monkey.prototype = Animal.prototype;
 
 var Mila = new Cat("Mila");
 Mila.putInTheDocument();
